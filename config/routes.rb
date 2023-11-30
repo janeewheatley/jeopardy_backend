@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  options '*path', to: 'application#cors_preflight_check'
+  # options '*path', to: 'application#cors_preflight_check'
 
   get 'welcome/index'
 
