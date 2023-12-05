@@ -76,3 +76,5 @@ gem "annotate", "~> 3.2"
 # gem "devise", "~> 4.9"
 
 gem "rack-cors", "~> 2.0"
+
+gem "vite_rails", "~> 3.0"

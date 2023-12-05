@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  root 'general#index'
-
-  get 'welcome/index'
+  root to: 'general#index'
 
   get 'welcome', to: 'welcome#index'
-  root to: 'welcome#index'
+  #root to: 'welcome#index'
 
   resources :users
 
