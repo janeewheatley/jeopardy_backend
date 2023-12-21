@@ -1,6 +1,4 @@
 class GeneralController < ApplicationController
-    layout false
-  
     # GET /
     #
     # Render main application page
