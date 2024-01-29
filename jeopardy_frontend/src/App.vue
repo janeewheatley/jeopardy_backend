@@ -61,6 +61,7 @@ import ResponseComponent from "@/components/ResponseComponent.vue";
 import NextComponent from "@/components/NextComponent.vue";
 import CounterComponent from "@/components/CounterComponent.vue";
 import { useClueStore } from "./stores/ClueStore";
+import { useGameStore } from "./stores/GameStore";
 import { useCounterStore } from "./stores/CounterStore";
 import axios from "axios";
 
@@ -85,7 +86,7 @@ export default {
   methods: {
     submitCallback(userAnswerValue) {
       this.displayAnswer = true;
-      const store = useClueStore();
+      const clueStore = useClueStore();
       const counterStore = useCounterStore();
 
       this.disableSubmitBtn = true;
@@ -94,7 +95,7 @@ export default {
       this.disableNextBtn = false;
       counterStore.incrementCounterTotal();
 
-      if (!this.compareResponses(userAnswerValue, store.response)) {
+      if (!this.compareResponses(userAnswerValue, clueStore.response)) {
         this.responseValid = false;
         this.responseInvalid = true;
         this.disableTextField = true;
@@ -106,8 +107,8 @@ export default {
         counterStore.incrementCounterCorrect();
         this.disableSubmitBtn = true;
       }
-      this.submitResponse(store.clues, userAnswerValue, this.responseValid);
-      this.submitQuestion(store.api_id, userAnswerValue, this.responseValid);
+      this.submitResponse(clueStore.clues, userAnswerValue, this.responseValid);
+      this.submitQuestion(clueStore.api_id, userAnswerValue, this.responseValid);
     },
     storeAnswerCallback() {
       const textAreaValue =
@@ -142,34 +143,41 @@ export default {
       return newResponse.toLowerCase().replace(/\s/g, "");
     },
     submitResponse(question, answer, result) {
-      axios.post("http://localhost:3000/games", {
-        question: question,
-        answer: answer,
-        result: result,
-      });
+      const gameStore = useGameStore();
+      axios
+        .post("http://localhost:3000/games", {
+          question: question,
+          answer: answer,
+          result: result,
+        })
+        .then(function (response) {
+          console.log(response);
+          gameStore.commit("setGameId", response.data.id);
+        });
     },
     submitQuestion(question, answer, result) {
+      const gameStore = useGameStore();
       axios.post("http://localhost:3000/questions", {
         question: question,
         answer: answer,
         result: result,
+        game_id: gameStore.game_id
       });
     },
   },
   mounted() {
     useClueStore().fetchClues();
-    axios
-      .post("http://localhost:3000/sign_in", {
-        email: "jelwheatley@gmail.com",
-        password: "Password",
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .post("http://localhost:3000/sign_in", {
+    //     email: "jelwheatley@gmail.com",
+    //     password: "Password",
+    //   })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   },
 };
 </script>
-
