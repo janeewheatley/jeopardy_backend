@@ -1,26 +1,72 @@
-<h2 class="text-center mt-5">Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field text-center mt-5">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field text-center mt-1">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field text-center mt-1">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<!-- Login 9 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5 py-xl-8 color">
+  <div class="container">
+    <div class="row gy-4 align-items-center">
+      <div class="col-12 col-md-6 col-xl-7">
+        <div class="d-flex justify-content-center ">
+          <div class="col-12 col-xl-9">
+            <img class="img-fluid rounded mb-4" loading="lazy" src="https://sm.ign.com/t/ign_nordic/feature/a/are-jeopar/are-jeopardy-contestants-getting-better_s927.1280.jpg" width="245" height="80" alt="Jeopardy Logo">
+            <hr class="border-primary-subtle mb-4">
+            <h2 class="h1 mb-4 text-white">This is ... JEOPARDY</h2>
+            <p class="lead mb-5 text-white">Practice your trivia knowledge.</p>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-xl-5">
+        <div class="card border-0 rounded-4">
+          <div class="card-body p-3 p-md-4 p-xl-5">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-4">
+                  <h3>Login to Play</h3>
+                </div>
+              </div>
+            </div>
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field text-center mt-5">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+            
+              <div class="field text-center mt-1">
+                <%= f.label :password %><br />
+                <%= f.password_field :password, autocomplete: "current-password" %>
+              </div>
+            
+              <% if devise_mapping.rememberable? %>
+                <div class="field text-center mt-1">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+            
+              <div class="actions text-center mt-1">
+                <%= f.submit "Log in" %>
+              </div>
+            
+            <% end %>
+            <%= render "devise/shared/links" %>
+            
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions text-center mt-1">
-    <%= f.submit "Log in" %>
   </div>
+</section>
 
-<% end %>
-<%= render "devise/shared/links" %>
+<style type="text/css">
+   body { background: navy !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>

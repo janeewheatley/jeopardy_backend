@@ -25,6 +25,7 @@ export const useClueStore = defineStore("ClueStore", {
         this.clues = response.data.data[0].clue;
         this.category = response.data.data[0].category;
         this.response = response.data.data[0].response;
+        this.api_id = response.data.data[0].id;
       } catch (error) {
         alert(error);
         console.log(error);

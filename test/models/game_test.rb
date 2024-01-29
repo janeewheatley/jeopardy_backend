@@ -11,7 +11,7 @@
 require "test_helper"
 
 class GameTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "the truth" do
+    game = Game.create!(:user_id => 1)
+  end
 end

@@ -106,6 +106,8 @@ export default {
         counterStore.incrementCounterCorrect();
         this.disableSubmitBtn = true;
       }
+      this.submitResponse(store.clues, userAnswerValue, this.responseValid);
+      this.submitQuestion(store.api_id, userAnswerValue, this.responseValid);
     },
     storeAnswerCallback() {
       const textAreaValue =
@@ -138,6 +140,20 @@ export default {
     normalizeResponse(response) {
       let newResponse = "" + response;
       return newResponse.toLowerCase().replace(/\s/g, "");
+    },
+    submitResponse(question, answer, result) {
+      axios.post("http://localhost:3000/games", {
+        question: question,
+        answer: answer,
+        result: result,
+      });
+    },
+    submitQuestion(question, answer, result) {
+      axios.post("http://localhost:3000/questions", {
+        question: question,
+        answer: answer,
+        result: result,
+      });
     },
   },
   mounted() {
