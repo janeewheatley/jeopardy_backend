@@ -61,7 +61,6 @@ import ResponseComponent from "@/components/ResponseComponent.vue";
 import NextComponent from "@/components/NextComponent.vue";
 import CounterComponent from "@/components/CounterComponent.vue";
 import { useClueStore } from "./stores/ClueStore";
-import { useGameStore } from "./stores/GameStore";
 import { useCounterStore } from "./stores/CounterStore";
 import axios from "axios";
 
@@ -108,7 +107,6 @@ export default {
         this.disableSubmitBtn = true;
       }
       this.submitResponse(clueStore.clues, userAnswerValue, this.responseValid);
-      this.submitQuestion(clueStore.api_id, userAnswerValue, this.responseValid);
     },
     storeAnswerCallback() {
       const textAreaValue =
@@ -142,42 +140,16 @@ export default {
       let newResponse = "" + response;
       return newResponse.toLowerCase().replace(/\s/g, "");
     },
-    submitResponse(question, answer, result) {
-      const gameStore = useGameStore();
-      axios
-        .post("http://localhost:3000/games", {
-          question: question,
-          answer: answer,
-          result: result,
-        })
-        .then(function (response) {
-          console.log(response);
-          gameStore.commit("setGameId", response.data.id);
-        });
-    },
-    submitQuestion(question, answer, result) {
-      const gameStore = useGameStore();
-      axios.post("http://localhost:3000/questions", {
-        question: question,
-        answer: answer,
-        result: result,
-        game_id: gameStore.game_id
+    submitResponse(clue, user_answer, correct) {
+      axios.post("http://localhost:3000/games", {
+        clue: clue,
+        user_answer: user_answer,
+        correct: correct,
       });
     },
   },
   mounted() {
     useClueStore().fetchClues();
-    // axios
-    //   .post("http://localhost:3000/sign_in", {
-    //     email: "jelwheatley@gmail.com",
-    //     password: "Password",
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
   },
 };
 </script>

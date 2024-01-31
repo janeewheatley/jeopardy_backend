@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_21_195921) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_30_203630) do
   create_table "currents", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,6 +29,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_195921) do
     t.boolean "correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_answer"
+    t.string "clue"
   end
 
   create_table "users", force: :cascade do |t|

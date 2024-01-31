@@ -8,6 +8,9 @@
 #  correct    :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
+#  clue       :string
+#  user_answer:string
+
 class Question < ApplicationRecord
+    belongs_to :game
 end
