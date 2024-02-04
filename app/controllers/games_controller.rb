@@ -6,7 +6,7 @@ class GamesController < ApplicationController
         #     return game.total_questions
         # else 
         #     return 0
-        game.total_questions = ( game.total_questions || 0 ) + 1
+        game.total_questions = game.questions.count()
 
         game.save
 
