@@ -1,6 +1,8 @@
+<div class="text-center mt-5 text-white">
 <%- if controller_name != 'sessions' %>
   <%= link_to "Log in", new_session_path(resource_name) %><br />
 <% end %>
+</div>
 
 <div class="text-center mt-5">
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
